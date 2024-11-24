@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../angular-1.8.2/angular.js"></script>
+    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="../JS/main.js"></script>
+    <script type="module" src="../JS/controllers/indexCtrl.js"></script>
+    <title>Document</title>
+</head>
+
+<body ng-controller="indexCtrl">
+    <header>
+        <div class="header-container">
+            <h1>Meu Blog</h1>
+        </div>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <div>
+                <h2>Categorias</h2>
+                <ul>
+                    <li ng-click="buscarArtigos('JAVASCRIPT')">JavaScript</li>
+                    <li ng-click="buscarArtigos('ANGULARJS')">AngularJs</li>
+                    <li ng-click="buscarArtigos('REACTJS')">ReactJs</li>
+                    <li ng-click="buscarArtigos('REACTNATIVE')">React Native</li>
+                    <li ng-click="buscarArtigos('CSHARP')">C#</li>
+                    <li ng-click="buscarArtigos('JAVA')">Java</li>
+                    <li ng-click="buscarArtigos('TYPESCRIPT')">TypeScript</li>
+                    <li ng-click="buscarArtigos('CSS')">CSS</li>
+                    <li ng-click="buscarArtigos('BOOTSTRAP')">Bootstrap</li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content" ng-if="artigos.length > 0">
+            <section class="post" ng-repeat="artigo in artigos">
+                <div class="post-image" ng-style="{'background-image': 'url(' + capa + ')'}"></div>
+                <div class="post-info">
+                    <p class="category">{{artigo.categoria}}</p>
+                    <p class="date">Data publicação: {{artigo.dataPublicacao}}</p>
+                    <h3>{{artigo.titulo}}</h3>
+                    <!-- <p>Aprenda a como remover todos caracteres especiais...</p> -->
+                    <a ng-href="artigo.html?id={{artigo.id}}&categoria={{artigo.categoria}}" class="read-more">Ler mais
+                        →</a>
+                </div>
+            </section>
+        </main>
+
+        <div class="boas-vindas" ng-if="artigos.length === 0">
+            <h1>Bem-vindo ao Blog para Estudos!</h1>
+            <p>
+                Aqui você encontrará uma variedade de artigos para expandir seus conhecimentos.
+                No momento, parece que você ainda não escolheu nenhum artigo para ler.</p>
+            <p><strong>Selecione uma categoria</strong> no menu lateral para explorar tópicos de seu interesse.</p>
+        </div>
+    </div>
+</body>
+
+</html>

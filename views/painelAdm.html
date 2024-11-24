@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/painelAdm.css">
+    <script src="../angular-1.8.2/angular.js"></script>
+    <script type="module" src="../JS/main.js"></script>
+    <script type="module" src="../JS/controllers/painelAdmCtrl.js"></script>
+    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <title>Painel Administrativo - Publicação de Artigos</title>
+</head>
+
+<body ng-controller="painelAdmCtrl">
+    <div class="container">
+        <h1>Cadastro de Artigo Blog</h1>
+        <form>
+            <label for="titulo">Título do Artigo:</label>
+            <input type="text" ng-model="vm.titulo" name="titulo" placeholder="Digite o título do artigo">
+
+            <label for="conteudo">Conteúdo do Artigo:</label>
+            <textarea ng-model="vm.conteudo" name="conteudo" placeholder="Digite o conteúdo do artigo"></textarea>
+
+            <div style="margin-bottom: 30px; padding: 5px; border: 0.5px solid gray;">
+                <label for="imagem">Imagem de Capa:</label>
+                <input type="file" name="imagem" accept="image/*"
+                    onchange="angular.element(this).scope().capturarImagem(this, 'artigo')">
+                <button class="btn-remove-img" ng-click="removerImagem('artigo', $event)">Remover</button>
+            </div>
+
+            <div>
+                <label for="categoria">Categoria:</label>
+                <select ng-model="vm.categoria" name="categoria" required>
+                    <option value="" disabled selected>Selecione uma categoria</option>
+                    <option value="JAVASCRIPT">JavaScript</option>
+                    <option value="ANGULARJS">AngularJs</option>
+                    <option value="REACTJS">ReactJs</option>
+                    <option value="REACTNATIVE">React Native</option>
+                    <option value="CSHARP">C#</option>
+                    <option value="JAVA">Java</option>
+                    <option value="TYPESCRIPT">Typescript</option>
+                </select>
+            </div>
+
+            <div class="topico" ng-repeat="topico in vm.topicos">
+                <div class="icones-topico">
+                    <span ng-click="addItem('paragrafo', $index)" class="icone-topico add">
+                        <img src="../icones-lucide/add.svg" alt="">
+                    </span>
+                    <span ng-click="removeItem('paragrafo', $index)" class="icone-topico delete">
+                        <img src="../icones-lucide/delete.svg" alt="">
+                    </span>
+                </div>
+                <label for="titulo">Título do tópico:</label>
+                <input type="text" ng-model="topico.subtitulo" name="titulo" placeholder="Digite o título do tópico">
+
+                <label for="conteudo">Conteúdo do tópico:</label>
+                <textarea ng-model="topico.conteudo" name="conteudo"
+                    placeholder="Digite o conteúdo do tópico"></textarea>
+
+                <div style="padding: 5px; border: 0.5px solid gray;">
+                    <label for="imagem">Imagem:</label>
+                    <input type="file" name="imagem" accept="image/*"
+                        onchange="angular.element(this).scope().capturarImagem(this, 'topico')">
+                    <button class="btn-remove-img" ng-click="removerImagem('topico', $event, $index)">Remover</button>
+                </div>
+
+                <div class="paragrafo-topico" ng-repeat="paragrafo in topico.paragrafos track by $index">
+                    <label for="conteudo">Parágrafo {{$index + 1}}</label>
+                    <textarea ng-model="paragrafo.texto" name="conteudo"
+                        placeholder="Digite o conteúdo do paragrafo"></textarea>
+                </div>
+
+            </div>
+
+            <div class="buttons">
+                <button type="submit" ng-click="save()" class="btn-save">Salvar Artigo</button>
+                <button type="button" ng-click="previa()" class="btn-save">Prévia</button>
+                <button type="button" ng-click="addItem('topico')" class="btn-save">Adicionar tópico</button>
+                <button type="button" class="btn-cancel">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog do Gabriel</title>
+    <link rel="stylesheet" href="../css/artigo.css">
+    <script src="../angular-1.8.2/angular.js"></script>
+    <script src="../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="../JS/main.js"></script>
+    <script type="module" src="../JS/controllers/artigo.Ctrl.js"></script>
+</head>
+
+<body ng-controller="artigoCtrl">
+    <header class="blog-header">
+        <div class="container">
+            <h1>Blog de estudo Gabriel</h1>
+            <p>{{vm.titulo}}</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="post-title">{{vm.titulo}}</h2>
+            <p>{{vm.conteudo}}</p>
+            <img ng-show="vm.imagem" class="post-image" ng-src="{{vm.imagem.base64}}" alt="Imagem do artigo">
+            <div ng-repeat="topico in vm.topicos">
+                <h3 style="font-size: 1.2rem;" class="post-title">{{topico.subtitulo}}</h3>
+                <p>{{topico.conteudo}}</p>
+                <img ng-show="topico.imagem" class="post-image" ng-src="{{topico.imagem.base64}}"
+                    alt="Imagem do artigo">
+                <p ng-repeat="paragrafo in topico.paragrafos track by $index">
+                    {{paragrafo.texto}}
+                </p>
+            </div>
+            <span>{{vm.dataPublicacao}}</span>
+        </article>
+    </main>
+
+    <footer class="blog-footer">
+        <div class="container">
+            <p>&copy; 2024 Blog do Gabriel. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

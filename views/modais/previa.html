@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="../../css/modPrevia.css">
+
+<div id="modal-previa">
+    <section class="modal-body">
+        <div class="blog-post">
+            <h2 class="post-title">{{vm.titulo}}</h2>
+            <p>{{vm.conteudo}}</p>
+            <img ng-show="vm.imagem" class="post-image" ng-src="{{vm.imagem.base64}}" alt="Imagem do artigo">
+            <div ng-repeat="topico in vm.topicos">
+                <h3 style="font-size: 1.2rem;" class="post-title">{{topico.subtitulo}}</h3>
+                <p>{{topico.conteudo}}</p>
+                <img ng-show="topico.imagem" class="post-image" ng-src="{{topico.imagem.base64}}" alt="Imagem do artigo">
+                <p ng-repeat="paragrafo in topico.paragrafos track by $index">
+                    {{paragrafo.texto}}
+                </p>
+            </div>
+        </div>
+    </section>
+    <footer class="modal-footer">
+        <button ng-click="close()">Sair</button>
+        <button>Salvar</button>
+    </footer>
+</div>
